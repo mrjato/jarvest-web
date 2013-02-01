@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk>
+	<preference>
+		<name>org.zkoss.zk.ui.WebApp.name</name>
+		<value>JarvestWeb</value>
+	</preference>
+
+	<device-config>
+		<device-type>ajax</device-type>
+		<timeout-uri>/timeout.zul</timeout-uri><!-- An empty URL can cause the 
+			browser to reload the same URL -->
+	</device-config>
+	
+	<!-- device-config>
+	    <device-type>ajax</device-type>
+		<server-push-class>org.zkoss.zkmax.ui.comet.CometServerPush</server-push-class>
+	</device-config-->
+
+	<!-- Hibernate SessionFactory life cycle -->
+	<listener>
+		<description>Hibernate SessionFactory life cycle</description>
+		<listener-class>org.zkoss.zkplus.hibernate.HibernateSessionFactoryListener</listener-class>
+	</listener>
+
+	<!-- Hibernate OpenSessionInView life cycle -->
+	<listener>
+		<description>Hibernate Open Session In View life cycle</description>
+		<listener-class>org.zkoss.zkplus.hibernate.OpenSessionInViewListener</listener-class>
+	</listener>
+	
+	<listener>
+		<description>Checks if there is a logged user. If doesn't redirects to index.zul.</description>
+	    <listener-class>es.uvigo.ei.sing.jarvest.web.zk.initiators.SecurityInitiator</listener-class>
+	</listener>
+	
+	<listener>
+		<description>Checks if there is a logged user. If doesn't redirects to index.zul.</description>
+	    <listener-class>es.uvigo.ei.sing.jarvest.web.zk.initiators.ExecutorServiceManager</listener-class>
+	</listener>
+	
+	<library-property>
+	    <name>org.zkoss.zul.Button.mold</name>
+	    <value>trendy</value>
+	</library-property>
+</zk>

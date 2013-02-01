@@ -1,0 +1,105 @@
+<?page title="JarvestWeb (Beta)" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window 
+		title="JarvestWeb (Beta)"
+		id="winJarvestWeb" 
+		closable="true"
+		border="normal" 
+		style="margin: 0 auto;" 
+		width="960px"
+		apply="org.zkoss.bind.BindComposer" 
+		viewModel="@id('vm') @init('es.uvigo.ei.sing.jarvest.web.zk.vm.MainViewModel')"
+		binder="@init(queueName='robotCode')"
+		onClose="@command('closeSession')"
+	>
+		<borderlayout height="600px">
+			<west title="Robots" collapsible="true" width="200px">
+				<vlayout vflex="true" hflex="true">
+				 	<listbox model="@load(vm.robots)" selectedItem="@bind(vm.robot)" disabled="@load(vm.running)"/>
+				</vlayout>
+			</west>
+			<center title="Robot">
+				<tabbox>
+					<tabs>
+						<tab label="Robot"/>
+						<tab label="Execution"/>
+					</tabs>
+					<tabpanels>
+						<tabpanel>
+							<vlayout vflex="1" hflex="1">
+								<borderlayout height="540px">
+									<north collapsible="true" title="Information">
+										<caption>
+											<toolbarbutton label="New Robot" onClick="@command('newRobot')" disabled="@load(vm.running)"/>
+											<toolbarbutton label="Discard Changes" onClick="@command('refreshRobot')" disabled="@load(vm.running)"/>
+											<toolbarbutton label="Save Robot" onClick="@command('persistRobot')" disabled="@load(vm.running)"/>
+										</caption>
+										<vlayout hflex="1" vflex="true">
+											<hlayout vflex="1" valign="middle">
+												<label value="Robot Name"/>
+												<textbox value="@bind(vm.robot.name)" hflex="true" disabled="@load(vm.running)"/>
+												<label value="Content Type"/>
+												<textbox value="@bind(vm.robot.contentType)" disabled="@load(vm.running)"/>
+												<checkbox label="Is public?" checked="@bind(vm.robot.publicAccess)" disabled="@load(vm.running)"/>
+											</hlayout>
+											<label value="Description" hflex="true"/>
+											<textbox 
+												rows="3" hflex="true" 
+												value="@bind(vm.robot.description)" 
+												disabled="@load(vm.running)" multiline="true"
+											/>
+											<hlayout>
+												<label value="Robot URL: "/>
+												<label value="@load(vm.robotURL)"/>
+											</hlayout>
+										</vlayout>
+									</north>
+									<center title="Source code">
+										<vlayout>
+											<menubar>
+												<menuitem label="wget" onClick="@global-command('addRobotCode', robot='wget')"/>
+											</menubar>
+											<textbox value="@bind(vm.robot.robot)" 
+												apply="es.uvigo.ei.sing.jarvest.web.zk.composers.SourceCodeComposer"
+												id="txtSourceCode"
+												rows="20" 
+												hflex="true" 
+												vflex="true" 
+												style="font-family: monospace;"
+												onChange="@command('validateRobot')"
+												multiline="true"
+												tabbable="true"
+											/>
+										</vlayout>
+									</center>
+								</borderlayout>
+							</vlayout>
+						</tabpanel>
+						<tabpanel>
+							<borderlayout height="540px">
+								<north title="Inputs" collapsible="true">
+									<vlayout hflex="true" vflex="true">
+										<label value="Inputs (one per line)"/>
+										<textbox rows="5" hflex="true" vflex="true" multiline="true" value="@bind(vm.input)"/>
+										<hlayout hflex="true">
+											<button label="Launch!" onClick="@command('launchRobot')" disabled="@load(not vm.valid or vm.running)"/>
+										</hlayout>
+									</vlayout>
+								</north>
+								<center title="Execution Result" >
+									<textbox 
+										hflex="true" vflex="true" 
+										readonly="true" 
+										value="@load(vm.output)"
+										style="font-family: monospace;"
+										multiline="true"
+									/>
+								</center>
+							</borderlayout>
+						</tabpanel>								
+					</tabpanels>
+				</tabbox>
+			</center>
+		</borderlayout>
+	</window>
+</zk>

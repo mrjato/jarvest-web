@@ -1,0 +1,20 @@
+<?page title="JarvestWeb (Beta)"?>
+
+<zk>
+	<window 
+		title="JarvestWeb Login" 
+		border="normal" 
+		width="220px"
+		style="margin: 0 auto;"
+		apply="org.zkoss.bind.BindComposer" 
+		viewModel="@id('user') @init('es.uvigo.ei.sing.jarvest.web.zk.vm.UserViewModel')"
+	>
+		<vlayout>
+			<label value="Login"/>
+			<textbox hflex="true" value="@bind(user.login)"/>
+			<label value="Password"/>
+			<textbox hflex="true" value="@bind(user.password)" type="password" onOK="@command('checkLogin')"/>
+			<button label="Login" onClick="@command('checkLogin')"/>
+		</vlayout>
+	</window>
+</zk>
