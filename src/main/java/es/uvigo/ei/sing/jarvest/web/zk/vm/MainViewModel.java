@@ -15,6 +15,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 
+import es.uvigo.ei.sing.jarvest.RobotProperties;
 import es.uvigo.ei.sing.jarvest.dsl.Jarvest;
 import es.uvigo.ei.sing.jarvest.web.dao.HibernateUtils;
 import es.uvigo.ei.sing.jarvest.web.dao.RobotDAO;
@@ -49,6 +50,10 @@ public class MainViewModel {
 	public String getOutput() {
 		return this.outputSB.toString();
 	}
+	
+	public List<String> getRobotNames() {
+		return RobotProperties.getRobotNames();
+	}
 
 	public List<Robot> getRobots() {
 		final User user = UserViewModel.getCurrentUser();
@@ -63,6 +68,10 @@ public class MainViewModel {
 		});
 		
 		return robots;
+	}
+	
+	public List<String> getBranchNames() {
+		return RobotProperties.getBranchNames();
 	}
 	
 	public boolean isRunning() {

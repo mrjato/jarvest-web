@@ -57,7 +57,20 @@
 									<center title="Source code">
 										<vlayout>
 											<menubar>
-												<menuitem label="wget" onClick="@global-command('addRobotCode', robot='wget')"/>
+												<menu label="Add transformer">
+													<menupopup children="@init(vm.robotNames)">
+														<template name="children" var="robotName">
+															<menuitem label="@load(robotName)" onClick="@global-command('addRobotCode', robot=self.label)"/>
+														</template>
+													</menupopup>
+												</menu>
+												<menu label="Add branch">
+													<menupopup children="@init(vm.branchNames)">
+														<template name="children" var="branchName">
+															<menuitem label="@load(branchName)" onClick="@global-command('addBranchCode', branch=self.label)"/>
+														</template>
+													</menupopup>
+												</menu>
 											</menubar>
 											<textbox value="@bind(vm.robot.robot)" 
 												apply="es.uvigo.ei.sing.jarvest.web.zk.composers.SourceCodeComposer"
