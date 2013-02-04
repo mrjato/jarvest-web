@@ -23,6 +23,8 @@ import es.uvigo.ei.sing.jarvest.web.entities.User;
 import es.uvigo.ei.sing.jarvest.web.zk.initiators.ExecutorServiceManager;
 
 public class MainViewModel {
+	public static final String QUEUE_NAME = "jarvestweb";
+	
 	private Robot robot = new Robot();
 	private boolean isRunning = false;
 	private String inputs = "";
@@ -179,11 +181,11 @@ public class MainViewModel {
 					if (event.getName().equals(OutputEvent.EVENT_ON_OUTPUT)) {
 						MainViewModel.this.outputSB.append(((OutputEvent) event).getOutput());
 						
-						BindUtils.postNotifyChange(null, null, MainViewModel.this, "output");
+						BindUtils.postNotifyChange(MainViewModel.QUEUE_NAME, null, MainViewModel.this, "output");
 					} else if (event.getName().equals(FinishEvent.EVENT_ON_FINISH)) {
 						MainViewModel.this.isRunning = false;
 						
-						BindUtils.postNotifyChange(null, null, MainViewModel.this, "running");
+						BindUtils.postNotifyChange(MainViewModel.QUEUE_NAME, null, MainViewModel.this, "running");
 					}
 				}
 			});

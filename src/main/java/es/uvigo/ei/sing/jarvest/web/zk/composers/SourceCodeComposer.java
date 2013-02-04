@@ -11,6 +11,8 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zkmax.ui.select.annotation.Subscribe;
 import org.zkoss.zul.Textbox;
 
+import es.uvigo.ei.sing.jarvest.web.zk.vm.MainViewModel;
+
 public class SourceCodeComposer extends SelectorComposer<Textbox> {
 	private static final long serialVersionUID = 1L;
 
@@ -60,7 +62,7 @@ public class SourceCodeComposer extends SelectorComposer<Textbox> {
 //		});
 	}
 	
-	@Subscribe("robotCode")
+	@Subscribe(MainViewModel.QUEUE_NAME)
 	public void updateSourceCode(Event event) {
 		if (event instanceof GlobalCommandEvent) {
 			final GlobalCommandEvent gcEvent = (GlobalCommandEvent) event;

@@ -12,10 +12,10 @@
 			browser to reload the same URL -->
 	</device-config>
 	
-	<!-- device-config>
+	<device-config>
 	    <device-type>ajax</device-type>
 		<server-push-class>org.zkoss.zkmax.ui.comet.CometServerPush</server-push-class>
-	</device-config-->
+	</device-config>
 
 	<!-- Hibernate SessionFactory life cycle -->
 	<listener>

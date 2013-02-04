@@ -9,7 +9,7 @@
 		width="960px"
 		apply="org.zkoss.bind.BindComposer" 
 		viewModel="@id('vm') @init('es.uvigo.ei.sing.jarvest.web.zk.vm.MainViewModel')"
-		binder="@init(queueName='robotCode')"
+		binder="@init(queueName='jarvestweb')"
 		onClose="@command('closeSession')"
 	>
 		<borderlayout height="600px">
