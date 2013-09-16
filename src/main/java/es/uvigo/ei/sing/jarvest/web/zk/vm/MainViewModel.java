@@ -8,6 +8,7 @@ import java.util.List;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.DependsOn;
+import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.Execution;
@@ -26,10 +27,18 @@ import es.uvigo.ei.sing.jarvest.web.zk.initiators.ExecutorServiceManager;
 public class MainViewModel {
 	public static final String QUEUE_NAME = "jarvestweb";
 	
-	private Robot robot = new Robot();
-	private boolean isRunning = false;
-	private String inputs = "";
-	private StringBuffer outputSB = new StringBuffer();
+	private Robot robot;
+	private boolean isRunning;
+	private String inputs;
+	private StringBuffer outputSB;
+	
+	@Init
+	public void init() {
+		this.robot = new Robot();
+		this.isRunning = false;
+		this.inputs = "";
+		this.outputSB = new StringBuffer();
+	}
 
 	public Robot getRobot() {
 		return robot;

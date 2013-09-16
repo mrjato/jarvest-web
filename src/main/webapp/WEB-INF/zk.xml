@@ -12,10 +12,26 @@
 			browser to reload the same URL -->
 	</device-config>
 	
-	<device-config>
+	<!-- device-config>
 	    <device-type>ajax</device-type>
 		<server-push-class>org.zkoss.zkmax.ui.comet.CometServerPush</server-push-class>
+	</device-config-->
+	<device-config>
+	    <device-type>ajax</device-type>
+	    <server-push-class>org.zkoss.zk.ui.impl.PollingServerPush</server-push-class>
 	</device-config>
+	<preference>
+	    <name>PollingServerPush.delay.min</name>
+	    <value>1000</value>
+	</preference>
+	<preference>
+	    <name>PollingServerPush.delay.max</name>
+	    <value>5000</value>
+	</preference>
+	<preference>
+	    <name>PollingServerPush.delay.factor</name>
+	    <value>3</value>
+	</preference>
 
 	<!-- Hibernate SessionFactory life cycle -->
 	<listener>

@@ -3,9 +3,9 @@ package es.uvigo.ei.sing.jarvest.web.zk.composers;
 import org.zkoss.bind.GlobalCommandEvent;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.event.EventQueues;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zkmax.ui.select.annotation.Subscribe;
 import org.zkoss.zul.Textbox;
 
 import es.uvigo.ei.sing.jarvest.RobotProperties;
@@ -42,9 +42,16 @@ public class SourceCodeComposer extends SelectorComposer<Textbox> {
 		
 		this.txtSourceCode.addEventListener("onMyClick", updatePositionEL);
 		this.txtSourceCode.addEventListener("onMyKey", updatePositionEL);
+		
+		EventQueues.lookup(MainViewModel.QUEUE_NAME).subscribe(new EventListener<Event>() {
+			@Override
+			public void onEvent(Event event) throws Exception {
+				SourceCodeComposer.this.updateSourceCode(event);
+			}
+		});
 	}
 	
-	@Subscribe(MainViewModel.QUEUE_NAME)
+//	@Subscribe(MainViewModel.QUEUE_NAME)
 	public void updateSourceCode(Event event) {
 		if (event instanceof GlobalCommandEvent) {
 			final GlobalCommandEvent gcEvent = (GlobalCommandEvent) event;

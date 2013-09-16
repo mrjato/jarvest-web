@@ -29,12 +29,12 @@
 							<vlayout vflex="1" hflex="1">
 								<borderlayout height="540px">
 									<north collapsible="true" title="Information">
-										<caption>
-											<toolbarbutton label="New Robot" onClick="@command('newRobot')" disabled="@load(vm.running)"/>
-											<toolbarbutton label="Discard Changes" onClick="@command('refreshRobot')" disabled="@load(vm.running)"/>
-											<toolbarbutton label="Save Robot" onClick="@command('persistRobot')" disabled="@load(vm.running)"/>
-										</caption>
 										<vlayout hflex="1" vflex="true">
+											<toolbar>
+												<toolbarbutton label="New Robot" onClick="@command('newRobot')" disabled="@load(vm.running)"/>
+												<toolbarbutton label="Discard Changes" onClick="@command('refreshRobot')" disabled="@load(vm.running)"/>
+												<toolbarbutton label="Save Robot" onClick="@command('persistRobot')" disabled="@load(vm.running)"/>
+											</toolbar>
 											<hlayout vflex="1" valign="middle">
 												<label value="Robot Name"/>
 												<textbox value="@bind(vm.robot.name)" hflex="true" disabled="@load(vm.running)"/>
